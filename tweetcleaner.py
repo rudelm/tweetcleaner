@@ -11,8 +11,6 @@ access_token_secret = 'xxx'
 utc = pytz.UTC
 delete_everything_before = utc.localize(datetime(2020, 6, 1))
 
-tweets = read_json('./data/tweet.js')
-
 def read_json(file):
     """
     reads a JSON file into a list dictionaries
@@ -26,6 +24,8 @@ def read_json(file):
 
         json_list = json.loads(json_content)
     return(json_list)
+
+tweets = read_json('./data/tweet.js')
 
 auth = tweepy.OAuthHandler(api_key, api_secret_key)
 auth.set_access_token(access_token, access_token_secret)
