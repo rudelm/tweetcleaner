@@ -3,10 +3,7 @@ import json
 from datetime import datetime
 import pytz
 
-api_key = 'xxx'
-api_secret_key = 'xxx'
-access_token = 'xxx'
-access_token_secret = 'xxx'
+import credentials
 
 utc = pytz.UTC
 delete_everything_before = utc.localize(datetime(2020, 6, 1))
@@ -27,8 +24,8 @@ def read_json(file):
 
 tweets = read_json('./data/tweet.js')
 
-auth = tweepy.OAuthHandler(api_key, api_secret_key)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(config.api_key, config.api_secret_key)
+auth.set_access_token(config.access_token, config.access_token_secret)
 api = tweepy.API(auth)
 print("Authenticated as: %s" % api.me().screen_name)
 
