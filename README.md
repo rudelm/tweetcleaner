@@ -13,8 +13,9 @@ This step can take some time up to several days, so I recommend to start with th
 * Open `More`
 * Select `Settings and Privacy`
 * Check if you've setup a valid phone number and valid email under `Your Account`, `Account information` - The phone number is required for getting developer credentials and the email is required for receiving a download link of the archive
-* Return to `Account information` and select `Download an archive of your data`
-* After some time you'll receive an email with an download link as well as a notification in the mobile apps and/or in the web app
+* Return to `Your Account` (where you also found `Account information`) and select `Download an archive of your data`
+* Click on `Request archive` to start the process of gathering your twitter data
+* After some time (24h or longer can be normal) you'll receive an email with an download link as well as a notification in the mobile apps and/or in the web app
 * Download the archive. Be aware, that this archive might be large and download speeds can be really slow (around 100kb/s)
 * The download link can only be used once, so take care when you'll want to download the archive
 * extract the archive next to the `tweetcleaner.py` script, so that you'll get two folders `data` and `assets` next to the `Your archive.yml`. The tweetcleaner will search for the file `./data/tweet.js` relative to its position. You can also change the path to file to your liking
