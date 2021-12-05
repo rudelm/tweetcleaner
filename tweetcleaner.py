@@ -27,8 +27,8 @@ def read_json(file):
 
 tweets = read_json('./data/tweet.js')
 
-auth = tweepy.OAuthHandler(config.api_key, config.api_secret_key)
-auth.set_access_token(config.access_token, config.access_token_secret)
+auth = tweepy.OAuthHandler(credentials.api_key, credentials.api_secret_key)
+auth.set_access_token(credentials.access_token, credentials.access_token_secret)
 api = tweepy.API(auth)
 print("Authenticated as: %s" % api.me().screen_name)
 
