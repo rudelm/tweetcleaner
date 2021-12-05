@@ -12,15 +12,18 @@ def read_json(file):
     """
     reads a JSON file into a list dictionaries
     """
-    with open(file, encoding = 'utf-8') as jsonfile:
-        file_content = jsonfile.read()
+    try:
+        with open(file, encoding = 'utf-8') as jsonfile:
+            file_content = jsonfile.read()
 
-        # the Twitter tweet.js is a JavaScript file and cannot be parsed as json directly
-        # remove the variable assignment first before its loaded into a json dictionary
-        json_content = file_content.strip('window.YTD.tweet.part0 = ')
+            # the Twitter tweet.js is a JavaScript file and cannot be parsed as json directly
+            # remove the variable assignment first before its loaded into a json dictionary
+            json_content = file_content.strip('window.YTD.tweet.part0 = ')
 
-        json_list = json.loads(json_content)
-    return(json_list)
+            json_list = json.loads(json_content)
+        return(json_list)
+    except Exception:
+        print('Twitter archive not found in file ', file)
 
 tweets = read_json('./data/tweet.js')
 
