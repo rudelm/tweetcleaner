@@ -2,6 +2,7 @@ import tweepy
 import json
 from datetime import datetime
 import pytz
+import sys
 
 import credentials
 
@@ -24,6 +25,7 @@ def read_json(file):
         return(json_list)
     except Exception:
         print('Twitter archive not found in file ', file)
+        sys.exit(1)
 
 tweets = read_json('./data/tweet.js')
 
