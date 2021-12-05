@@ -47,7 +47,8 @@ pip3 install -r requirements.txt
 * Copy the `Access Token Secret`
 
 # Setup tweetcleaner
-* Insert the copied credentials at the top of the script
+* create a copy or rename `example.credentials.py` to `credentials.py`
+* Insert the copied credentials at the top of the `credentials.py`
 * Set the date for `delete_everything_before`. All old tweets before this date will be deleted 
 
 # Execute tweetcleaner
