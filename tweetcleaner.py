@@ -67,7 +67,7 @@ for tweet in tweets_marked_old:
 # delete marked tweets by status ID
 for status_id in to_delete_ids:
     try:
-        api.destroy_status(status_id)
+        #api.destroy_status(status_id)
         print(status_id, 'deleted!')
         delete_count += 1
     except tweepy.TweepyException as e:
