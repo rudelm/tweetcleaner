@@ -32,7 +32,9 @@ tweets = read_json('./data/tweet.js')
 auth = tweepy.OAuthHandler(credentials.api_key, credentials.api_secret_key)
 auth.set_access_token(credentials.access_token, credentials.access_token_secret)
 api = tweepy.API(auth)
-print("Authenticated as: %s" % api.me().screen_name)
+# Get the User object for twitter...
+user = api.get_user(screen_name='twitter')
+print("Authenticated as: %s" % user.screen_name)
 
 tweets_marked_old = []
 retweets_marked_old = []
