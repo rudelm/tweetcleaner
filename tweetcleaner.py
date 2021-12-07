@@ -7,7 +7,7 @@ import sys
 import credentials
 
 utc = pytz.UTC
-delete_everything_before = utc.localize(datetime(2020, 6, 1))
+delete_everything_before = utc.localize(datetime(2021, 12, 1))
 
 def read_json(file):
     """
