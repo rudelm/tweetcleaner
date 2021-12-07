@@ -58,6 +58,9 @@ for tweet in tweets_marked_old:
 to_delete_ids = []
 delete_count = 0
 
+failed_ids = []
+failed_count = 0
+
 for tweet in tweets_marked_old:
    to_delete_ids.append(tweet['id'])
 
@@ -68,10 +71,13 @@ for status_id in to_delete_ids:
         print(status_id, 'deleted!')
         delete_count += 1
     except tweepy.TweepyException as e:
-        print(status_id, 'could not be deleted, because ', e.response.text)
-        print(e)
+        print(status_id, 'could not be deleted, because ', e)
     except tweepy.HTTPException as e:
-        print(status_id, 'could not be deleted, because ', e.response.text)
-        print(e)
+        print(status_id, 'could not be deleted, because ', e.api_codes)
+        failed_count += 1
+        failed_ids.append(tweepy['id'])
 
 print(delete_count, 'tweets deleted.')
+print(failed_count, 'tweets unable to delete.')
+print('full list of failed IDs:')
+print(*failed_ids, sep = ", ") 
