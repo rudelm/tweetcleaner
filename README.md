@@ -68,5 +68,17 @@ Here's an example output:
 1246894312358645760 deleted!
 1246871787134160901 deleted!
 1246870082380279808 deleted!
-2457 tweets deleted.
+1951 tweets deleted.
+0 tweets unable to delete.
+full list of failed IDs:
 ```
+
+# Changelog
+
+## 2021
+* Updated tweepy library
+* fixed bugfixes
+* added better error handling and output
+
+## 2020
+* Initial release
