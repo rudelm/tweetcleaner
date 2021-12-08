@@ -7,6 +7,22 @@ First of all, the current twitter exports aren't anymore in CSV format. Therefor
 
 Second, there are some pitfalls with the twitter API I want to document. You'll need to create API credentials with `Read and Write` permissions, otherwise your script won't be able to delete anything at all.
 
+# Changelog
+
+## 2021
+* Updated tweepy library
+* fixed bugfixes
+* added better error handling and output
+
+## 2020
+* Initial release
+
+# ToDos
+* enable deletion with parameter on command line
+* some tweets aren't deleted because they were retweets. Those need a special handling for "unretweeting"
+* write output to log file
+* skip already deleted tweets without displaying them again
+
 # Requesting your Twitter archive
 This step can take some time up to several days, so I recommend to start with this first.
 * Go to [twitter.com](https://twitter.com)
@@ -73,12 +89,3 @@ Here's an example output:
 full list of failed IDs:
 ```
 
-# Changelog
-
-## 2021
-* Updated tweepy library
-* fixed bugfixes
-* added better error handling and output
-
-## 2020
-* Initial release
