@@ -3,11 +3,29 @@ import json
 from datetime import datetime
 import pytz
 import sys
+import argparse
+import logging
 
 import credentials
 
 utc = pytz.UTC
 delete_everything_before = utc.localize(datetime(2021, 12, 1))
+
+logger = logging.getLogger(__name__)
+
+parser = argparse.ArgumentParser(
+    description='A tool for automated deletion of Twitter tweets before a given time'
+)
+parser.add_argument(
+    '-v', '--verbose',
+    help="Verbose logging",
+    action="store_true"
+)
+
+args = parser.parse_args()
+if args.verbose:  
+    logging.basicConfig(level=logging.DEBUG)
+
 
 def read_json(file):
     """
@@ -24,7 +42,21 @@ def read_json(file):
             json_list = json.loads(json_content)
         return(json_list)
     except Exception:
-        print('Twitter archive not found in file ', file)
+        logger.error('Twitter archive not found in file ' + file)
+        sys.exit(1)
+
+def write_report_json(data):
+    """
+    writes a JSON report of the execution
+    """
+    timestring = datetime.now().strftime("%Y%m%d-%H%M%S")
+    filename = 'report-' + timestring + '.json'
+    try:
+        with open(filename, 'w') as jsonfile:
+            json.dump(data, jsonfile, sort_keys=True, indent=4)
+        return filename
+    except Exception:
+        logger.error('Could not write ' + filename)
         sys.exit(1)
 
 tweets = read_json('./data/tweet.js')
@@ -45,21 +77,20 @@ for entry in tweets:
     # parse string into datetime, e.g. "Mon Jul 15 09:34:01 +0000 2013"
     created_at_datetime = datetime.strptime(created_at, '%a %b %d %H:%M:%S %z %Y')
     if (created_at_datetime < delete_everything_before):
-        print('Tweet found to delete:')
-        #print(json.dumps(tweet))
+        logger.debug('Tweet found to delete: ' + json.dumps(tweet))
         tweets_marked_old.append(tweet)
 
-print(len(tweets_marked_old), 'tweets marked for deletion.')
-
-for tweet in tweets_marked_old:
-   print(json.dumps(tweet))
+print(len(tweets_marked_old), 'tweets found and marked for deletion.')
 
 # build list of marked status IDs
 to_delete_ids = []
 delete_count = 0
+deleted_ids = []
 
 failed_ids = []
 failed_count = 0
+
+report_data = {}
 
 for tweet in tweets_marked_old:
    to_delete_ids.append(tweet['id'])
@@ -68,16 +99,20 @@ for tweet in tweets_marked_old:
 for status_id in to_delete_ids:
     try:
         #api.destroy_status(status_id)
-        print(status_id, 'deleted!')
+        logger.debug(status_id + ' deleted!')
+        deleted_ids.append(status_id)
         delete_count += 1
     except tweepy.TweepyException as e:
-        print(status_id, 'could not be deleted, because ', e)
+        logger.error(status_id + ' could not be deleted, because ' + e)
     except tweepy.HTTPException as e:
-        print(status_id, 'could not be deleted, because ', e.api_codes)
+        logger.error(status_id + ' could not be deleted, because ' + e.api_codes)
         failed_count += 1
-        failed_ids.append(tweepy['id'])
+        failed_ids.append(status_id)
 
 print(delete_count, 'tweets deleted.')
 print(failed_count, 'tweets unable to delete.')
-print('full list of failed IDs:')
-print(*failed_ids, sep = ", ") 
+
+report_data['deleted'] = deleted_ids
+report_data['failed'] = failed_ids
+
+print('A report of what happened can be found in ' + write_report_json(report_data))
