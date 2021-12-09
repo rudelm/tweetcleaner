@@ -77,12 +77,8 @@ Here's an example output:
 
 ```
 ...
-1247246015905832961 deleted!
-1246894312358645760 deleted!
-1246871787134160901 deleted!
-1246870082380279808 deleted!
 1951 tweets deleted.
 0 tweets unable to delete.
-full list of failed IDs:
+A report of what happened can be found in report-20211210-003341.json
 ```
 
