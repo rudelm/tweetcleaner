@@ -22,6 +22,7 @@ Second, there are some pitfalls with the twitter API I want to document. You'll 
 # ToDos
 * some tweets aren't deleted because they were retweets. Those need a special handling for "unretweeting"
 * show progress n/x tweets deleted and/or failed
+* show time used
 
 # Requesting your Twitter archive
 This step can take some time up to several days, so I recommend to start with this first.
