@@ -20,9 +20,8 @@ Second, there are some pitfalls with the twitter API I want to document. You'll 
 * Initial release
 
 # ToDos
-* enable deletion with parameter on command line
 * some tweets aren't deleted because they were retweets. Those need a special handling for "unretweeting"
-* skip already deleted tweets without displaying them again
+* show progress n/x tweets deleted and/or failed
 
 # Requesting your Twitter archive
 This step can take some time up to several days, so I recommend to start with this first.

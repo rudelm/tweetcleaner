@@ -22,6 +22,12 @@ parser.add_argument(
     action="store_true"
 )
 
+parser.add_argument(
+    '-d', '--delete',
+    help='Deletes tweets if set',
+    action="store_true"
+)
+
 args = parser.parse_args()
 if args.verbose:  
     logging.basicConfig(level=logging.DEBUG)
@@ -95,14 +101,13 @@ for tweet in tweets_marked_old:
 # delete marked tweets by status ID
 for status_id in to_delete_ids:
     try:
-        #api.destroy_status(status_id)
+        if args.delete:
+            api.destroy_status(status_id)
         logger.debug(status_id + ' deleted!')
         deleted_ids.append(status_id)
         delete_count += 1
-    except tweepy.TweepyException as e:
-        logger.error(status_id + ' could not be deleted, because ' + e)
     except tweepy.HTTPException as e:
-        logger.error(status_id + ' could not be deleted, because ' + e.api_codes)
+        logger.error(status_id + ' could not be deleted, because ' + str(e))
         failed_count += 1
         failed_ids.append(status_id)
 
