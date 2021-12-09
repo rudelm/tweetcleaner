@@ -13,6 +13,8 @@ Second, there are some pitfalls with the twitter API I want to document. You'll 
 * Updated tweepy library
 * fixed bugfixes
 * added better error handling and output
+* added verbose mode
+* added report.json
 
 ## 2020
 * Initial release
@@ -20,7 +22,6 @@ Second, there are some pitfalls with the twitter API I want to document. You'll 
 # ToDos
 * enable deletion with parameter on command line
 * some tweets aren't deleted because they were retweets. Those need a special handling for "unretweeting"
-* write output to log file
 * skip already deleted tweets without displaying them again
 
 # Requesting your Twitter archive
