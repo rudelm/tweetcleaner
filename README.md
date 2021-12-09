@@ -68,11 +68,7 @@ pip3 install -r requirements.txt
 * Set the date for `delete_everything_before`. All old tweets before this date will be deleted 
 
 # Execute tweetcleaner
-By default, the script will only analyze your data without executing any deletion. If you're satisfied with the results, you can remove the comment from line 65:
-
-```
-# api.destroy_status(status_id)
-```
+By default, the script will only analyze your data without executing any deletion. If you're satisfied with the results, you can rerun the command with the `-d` or `--delete` parameter.
 
 Execute the script by using `python3 tweetcleaner.py`.
 
