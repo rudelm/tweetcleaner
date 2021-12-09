@@ -7,14 +7,32 @@ First of all, the current twitter exports aren't anymore in CSV format. Therefor
 
 Second, there are some pitfalls with the twitter API I want to document. You'll need to create API credentials with `Read and Write` permissions, otherwise your script won't be able to delete anything at all.
 
+# Changelog
+
+## 2021
+* Updated tweepy library
+* fixed bugfixes
+* added better error handling and output
+* added verbose mode
+* added report.json
+
+## 2020
+* Initial release
+
+# ToDos
+* some tweets aren't deleted because they were retweets. Those need a special handling for "unretweeting"
+* show progress n/x tweets deleted and/or failed
+* show time used
+
 # Requesting your Twitter archive
 This step can take some time up to several days, so I recommend to start with this first.
 * Go to [twitter.com](https://twitter.com)
 * Open `More`
 * Select `Settings and Privacy`
 * Check if you've setup a valid phone number and valid email under `Your Account`, `Account information` - The phone number is required for getting developer credentials and the email is required for receiving a download link of the archive
-* Return to `Account information` and select `Download an archive of your data`
-* After some time you'll receive an email with an download link as well as a notification in the mobile apps and/or in the web app
+* Return to `Your Account` (where you also found `Account information`) and select `Download an archive of your data`
+* Click on `Request archive` to start the process of gathering your twitter data
+* After some time (24h or longer can be normal) you'll receive an email with an download link as well as a notification in the mobile apps and/or in the web app
 * Download the archive. Be aware, that this archive might be large and download speeds can be really slow (around 100kb/s)
 * The download link can only be used once, so take care when you'll want to download the archive
 * extract the archive next to the `tweetcleaner.py` script, so that you'll get two folders `data` and `assets` next to the `Your archive.yml`. The tweetcleaner will search for the file `./data/tweet.js` relative to its position. You can also change the path to file to your liking
@@ -46,15 +64,12 @@ pip3 install -r requirements.txt
 * Copy the `Access Token Secret`
 
 # Setup tweetcleaner
-* Insert the copied credentials at the top of the script
+* create a copy or rename `example.credentials.py` to `credentials.py`
+* Insert the copied credentials at the top of the `credentials.py`
 * Set the date for `delete_everything_before`. All old tweets before this date will be deleted 
 
 # Execute tweetcleaner
-By default, the script will only analyze your data without executing any deletion. If you're satisfied with the results, you can remove the comment from line 63:
-
-```
-# api.destroy_status(status_id)
-```
+By default, the script will only analyze your data without executing any deletion. If you're satisfied with the results, you can rerun the command with the `-d` or `--delete` parameter.
 
 Execute the script by using `python3 tweetcleaner.py`.
 
@@ -62,9 +77,8 @@ Here's an example output:
 
 ```
 ...
-1247246015905832961 deleted!
-1246894312358645760 deleted!
-1246871787134160901 deleted!
-1246870082380279808 deleted!
-2457 tweets deleted.
+1951 tweets deleted.
+0 tweets unable to delete.
+A report of what happened can be found in report-20211210-003341.json
 ```
+
