@@ -60,6 +60,8 @@ def write_report_json(data):
         sys.exit(1)
 
 tweets = read_json('./data/tweet.js')
+report_data = {}
+report_data['total_number_tweets'] = len(tweets)
 
 auth = tweepy.OAuthHandler(credentials.api_key, credentials.api_secret_key)
 auth.set_access_token(credentials.access_token, credentials.access_token_secret)
@@ -87,8 +89,6 @@ deleted_ids = []
 failed_ids = []
 failed_count = 0
 
-report_data = {}
-
 for tweet in tweets_marked_old:
    to_delete_ids.append(tweet['id'])
 
@@ -110,6 +110,8 @@ print(delete_count, 'tweets deleted.')
 print(failed_count, 'tweets unable to delete.')
 
 report_data['deleted'] = deleted_ids
+report_data['deleted_count'] = delete_count
 report_data['failed'] = failed_ids
+report_data['failed_count'] = failed_count
 
 print('A report of what happened can be found in ' + write_report_json(report_data))
