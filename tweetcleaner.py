@@ -9,7 +9,7 @@ import logging
 import credentials
 
 utc = pytz.UTC
-delete_everything_before = utc.localize(datetime(2021, 12, 1))
+delete_everything_before = utc.localize(datetime(2022, 10, 1))
 
 logger = logging.getLogger(__name__)
 
@@ -41,9 +41,9 @@ def read_json(file):
         with open(file, encoding = 'utf-8') as jsonfile:
             file_content = jsonfile.read()
 
-            # the Twitter tweet.js is a JavaScript file and cannot be parsed as json directly
+            # the Twitter tweets.js is a JavaScript file and cannot be parsed as json directly
             # remove the variable assignment first before its loaded into a json dictionary
-            json_content = file_content.strip('window.YTD.tweet.part0 = ')
+            json_content = file_content.strip('window.YTD.tweets.part0 = ')
 
             json_list = json.loads(json_content)
         return(json_list)
@@ -65,7 +65,7 @@ def write_report_json(data):
         logger.error('Could not write ' + filename)
         sys.exit(1)
 
-tweets = read_json('./data/tweet.js')
+tweets = read_json('./data/tweets.js')
 report_data = {}
 report_data['total_number_tweets'] = len(tweets)
 

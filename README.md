@@ -9,6 +9,9 @@ Second, there are some pitfalls with the twitter API I want to document. You'll 
 
 # Changelog
 
+## 2022
+[Elon Musk bought Twitter on 27/10/2022](https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk). Many people started to clean up their twitter accounts and moved over to [Mastodon](https://en.wikipedia.org/wiki/Mastodon_(software)). So I've decided to update this repo a little bit earlier this year, as the need for it will probably be large.
+
 ## 2021
 * Updated tweepy library
 * fixed bugfixes
@@ -35,7 +38,7 @@ This step can take some time up to several days, so I recommend to start with th
 * After some time (24h or longer can be normal) you'll receive an email with an download link as well as a notification in the mobile apps and/or in the web app
 * Download the archive. Be aware, that this archive might be large and download speeds can be really slow (around 100kb/s)
 * The download link can only be used once, so take care when you'll want to download the archive
-* extract the archive next to the `tweetcleaner.py` script, so that you'll get two folders `data` and `assets` next to the `Your archive.yml`. The tweetcleaner will search for the file `./data/tweet.js` relative to its position. You can also change the path to file to your liking
+* extract the archive next to the `tweetcleaner.py` script, so that you'll get two folders `data` and `assets` next to the `Your archive.html`. The tweetcleaner will search for the file `./data/tweets.js` relative to its position. You can also change the path to file to your liking
 
 # Setup python3 environment
 Clone this repo to your machine. You can setup a python3 virtual environment, if you want to keep things clean.
