@@ -1,2 +1,2 @@
-tweepy
-pytz
+tweepy=4.4.0
+pytz=2021.3
