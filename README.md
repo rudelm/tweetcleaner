@@ -3,11 +3,17 @@ A twitter tweet cleaner written in python
 
 Inspired by [this blog](https://pushpullfork.com/i-deleted-tweets/) post, [I've started to cleanup old tweets from my own account at the end of a year](https://centurio.net/2019/01/01/howto-mass-delete-old-tweets-on-twitter/). The code in this repo is based upon his code but is updated and refined to my needs.
 
-First of all, the current twitter exports aren't anymore in CSV format. Therefore the python script needed some modification to work. It is now part of a JavaScript, but by removing the JavaScript assignment of `window.YTD.tweet.part0 = `, we'll get a valid JSON array of Hashes containing all relevant tweet data.
+First of all, the current twitter exports aren't anymore in CSV format. Therefore the python script needed some modification to work. It is now part of a JavaScript, but by removing the JavaScript assignment of `window.YTD.tweets.part0 = `, we'll get a valid JSON array of Hashes containing all relevant tweet data.
 
 Second, there are some pitfalls with the twitter API I want to document. You'll need to create API credentials with `Read and Write` permissions, otherwise your script won't be able to delete anything at all.
 
 # Changelog
+
+## 2022
+[Elon Musk bought Twitter on 27/10/2022](https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk). Many people started to clean up their twitter accounts and moved over to [Mastodon](https://en.wikipedia.org/wiki/Mastodon_(software)). So I've decided to update this repo a little bit earlier this year, as the need for it will probably be large.
+
+* The archive file containing all the tweet data is now named `tweets.js` instead of `tweet.js`
+* The JavaScript assignment also changed to reflect on the changed filename
 
 ## 2021
 * Updated tweepy library
@@ -35,7 +41,7 @@ This step can take some time up to several days, so I recommend to start with th
 * After some time (24h or longer can be normal) you'll receive an email with an download link as well as a notification in the mobile apps and/or in the web app
 * Download the archive. Be aware, that this archive might be large and download speeds can be really slow (around 100kb/s)
 * The download link can only be used once, so take care when you'll want to download the archive
-* extract the archive next to the `tweetcleaner.py` script, so that you'll get two folders `data` and `assets` next to the `Your archive.yml`. The tweetcleaner will search for the file `./data/tweet.js` relative to its position. You can also change the path to file to your liking
+* extract the archive next to the `tweetcleaner.py` script, so that you'll get two folders `data` and `assets` next to the `Your archive.html`. The tweetcleaner will search for the file `./data/tweets.js` relative to its position. You can also change the path to file to your liking
 
 # Setup python3 environment
 Clone this repo to your machine. You can setup a python3 virtual environment, if you want to keep things clean.
@@ -82,3 +88,17 @@ Here's an example output:
 A report of what happened can be found in report-20211210-003341.json
 ```
 
+## Error handling
+Sometimes, tweets cannot be properly deleted. This might look like this output:
+
+```
+python3 tweetcleaner.py -d
+1259 tweets found and marked for deletion.
+1506536934700731337 could not be deleted, because 403 Forbidden
+200 - Forbidden.
+1258 tweets deleted.
+1 tweets unable to delete.
+A report of what happened can be found in report-20221029-143105.json
+```
+
+In this case, the `report-20221029-143105.json` will also contain the failed id, in case you've already closed your terminal and lost the output. You should manually open the tweet id under your twitter profile, like https://twitter.com/<twittername>/status/<tweetIDthatFailed>. Now you can decide what you want to do about that tweet. In most cases, its a retweet that could not be unretweeted. This is one of the open ToDos.
